@@ -1,0 +1,47 @@
+services:
+
+  postgres:
+
+    container_name: postgres
+    image: postgres
+    env_file:
+      - ./.secrets.toml
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  pgadmin:
+
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    env_file:
+      -  ./.secrets.toml  
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    restart: unless-stopped
+
+  flask:
+
+    container_name: flask
+    env_file:
+      - "./.secrets.toml"
+    environment:
+      PROD: true
+    build: .
+    command: gunicorn --workers=4 --timeout=1200 app:app
+    ports:
+      - 8000:8000
+    depends_on:
+      - postgres
+    volumes:
+      - static_volume:/usr/src/app/static/
+    restart: always
+
+volumes:
+  static_volume:
+  postgres:
+  pgadmin:

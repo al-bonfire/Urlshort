@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>URL shortener</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <form method="POST">
+            <div>
+                <label for="url" >URL</label>
+                <input id="url" type="text" name="url" required />
+            </div>
+            <div>
+                <input type="submit" value="Enviar">
+            </div>
+        </form>
+        {% if token %}
+        <div>
+            Sua url é: <a href="http://{{host}}/flask/{{token}}"><strong>http://{{host}}/flask/{{token}}</strong></a>
+        </div>
+        {% endif %}
+    </body>
+</html>
