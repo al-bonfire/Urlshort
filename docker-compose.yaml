@@ -32,7 +32,7 @@ services:
     environment:
       PROD: true
     build: .
-    command: gunicorn --workers=4 --timeout=1200 app:app
+    command: gunicorn --bind 0.0.0.0 --workers=4 --timeout=1200 app:app
     ports:
       - 8000:8000
     depends_on:
