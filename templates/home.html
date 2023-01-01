@@ -19,9 +19,9 @@
                 <input type="submit" value="Enviar">
             </div>
         </form>
-        {% if token %}
+        {% if url %}
         <div>
-            Sua url é: <a href="http://{{host}}/flask/{{token}}"><strong>http://{{host}}/flask/{{token}}</strong></a>
+            Sua url é: <a href="{{ url }}"><strong>{{ url }}</strong></a>
         </div>
         {% endif %}
     </body>

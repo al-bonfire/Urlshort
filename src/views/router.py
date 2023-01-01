@@ -3,6 +3,7 @@ from src.models import URL, engine
 from sqlalchemy.orm import Session
 from secrets import token_urlsafe
 from src.config import settings as s
+from urllib.parse import urljoin
 
 bp = Blueprint('router', __name__)
 
@@ -37,7 +38,7 @@ def home():
                 db.add(data)
                 db.commit()
     
-    return render_template('home.html', token=token, host=s.HOST)
+    return render_template('home.html', url=urljoin(request.referrer, token))
 
 @bp.route('/<string:token>/')
 def redir(token):

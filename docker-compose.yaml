@@ -24,15 +24,15 @@ services:
       - "5050:80"
     restart: unless-stopped
 
-  flask:
+  encurtador:
 
-    container_name: flask
+    container_name: encurtador
     env_file:
       - "./.secrets.toml"
     environment:
       PROD: true
     build: .
-    command: gunicorn --bind 0.0.0.0 --workers=4 --timeout=1200 app:app
+    command: gunicorn --bind 0.0.0.0 --workers=3 --timeout=1200 app:app
     ports:
       - 8000:8000
     depends_on:
