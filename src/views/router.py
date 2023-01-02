@@ -22,10 +22,7 @@ def home():
             
             data = db.query(URL).filter_by(url=url).first()
             
-            if data:
-                token = data.token
-                
-            else:
+            if not data:
                 
                 loop = True
                 while loop:  
@@ -48,4 +45,4 @@ def redir(token):
     if data:
         return redirect(data.url)
     else:
-        return redirect(url_for('router.home'))
+        return redirect(request.referrer)
