@@ -45,4 +45,4 @@ def redir(token):
     if data:
         return redirect(data.url)
     else:
-        return redirect(request.referrer)
+        return urljoin('encurtador', url_for('router.home'))
