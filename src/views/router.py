@@ -37,12 +37,13 @@ def home():
     
     return render_template('home.html', url=urljoin(request.referrer, token))
 
+
 @bp.route('/<string:token>/')
-def redir(token):
+def redir_slash(token):
     with Session(engine) as db:
         data = db.query(URL).filter_by(token=token).first()
         
     if data:
         return redirect(data.url)
     else:
-        return urljoin('encurtador', url_for('router.home'))
+        return redirect('/encurtador/')
